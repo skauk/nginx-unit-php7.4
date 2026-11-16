@@ -16,7 +16,7 @@ RUN apt-get install -y --no-install-recommends build-essential php7.4-dev
 
 # Compile PHP 7.4 module
 RUN UNIT_VERSION=$(unitd --version 2>&1 | grep 'version:' | cut -d' ' -f3) \
-    UNIT_CONFIGURE=$(unitd --version 2>&1 | grep './configure' | sed -E 's/.*(\.\/configure)/\1/' | sed 's/--njs//' | sed "s/--ld-opt='.*'//") \
+    UNIT_CONFIGURE=$(unitd --version 2>&1 | grep './configure' | sed -E 's/.*(\.\/configure)/\1/' | sed 's/--njs//' | sed 's/--otel//' |sed "s/--ld-opt='.*'//") \
     && curl -sL "https://unit.nginx.org/download/unit-$UNIT_VERSION.tar.gz" | tar xzf - \
     && cd "$PWD/unit-$UNIT_VERSION" \
     && eval "$UNIT_CONFIGURE" \
